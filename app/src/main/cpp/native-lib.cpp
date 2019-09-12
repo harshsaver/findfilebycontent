@@ -16,7 +16,7 @@ char myStr[20];
 FILE* fp = fopen("/storage/emulated/0/Download/ex.txt","r");
 //if(fp!=NULL)
 //{
-fgets(myStr,20,fp);
+//fgets(myStr,20,fp);
 //fflush(fp);
 //fclose(fp);
 return env->NewStringUTF(myStr);
@@ -52,18 +52,19 @@ catch (std::ios_base::failure& e) {
 }
 return env->NewStringUTF(hello.c_str());
 }
-
+**/
 extern "C" JNIEXPORT jstring JNICALL
-Java_project_oop_engine_SearchAct_setconfiguration(JNIEnv * env, jclass obj, jstring path)
+Java_project_oop_engine_SearchAct_setconfiguration(JNIEnv * env, jclass obj, jstring mpath)
 {
     //convert your string into std::string.
-    const char *nativeString = env->GetStringUTFChars(path, 0);
-
+    const char *nativeString = env->GetStringUTFChars(mpath, 0);
+    char myStr[20];
     //make here your fopen.
-    fopen(nativeString,"r");
+    FILE* fg = fopen(nativeString,"r");
     std::string j = "hello";
+    fgets(myStr,20,fg);
     //getline(nativeString,j);
     //j = fread(nativeString);
-    return env->NewStringUTF(j.c_str());
+    return env->NewStringUTF(myStr);
 }
- **/
+

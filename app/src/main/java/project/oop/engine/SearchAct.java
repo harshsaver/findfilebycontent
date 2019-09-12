@@ -34,6 +34,7 @@ public class SearchAct extends AppCompatActivity {
         TextView tv = findViewById(R.id.sample_text);
         //tv.setText(stringFromJNI());
         String bb = " ";
+        bb = setconfiguration("/storage/emulated/0/Download/ex.txt");
        // bb = ndkopenfile(f);
         tv.setText("Hello Harsh");
         if(!bb.equals("")&&!bb.equals(" ")){
@@ -44,7 +45,7 @@ public class SearchAct extends AppCompatActivity {
 
 
         //path = SearchAct.this.getApplicationContext().getFilesDir().toString();
-        //setconfiguration("R.raw.your_file");
+
        // writeFileToPrivateStorage(R.raw.your_file,"your_output_file.txt");
     }
     /**
@@ -55,7 +56,7 @@ public class SearchAct extends AppCompatActivity {
 
     public native String ndkopenfile(String j);
 
-    //public static native String setconfiguration(String mpath);
+    public static native String setconfiguration(String mpath);
 
     public void writeFileToPrivateStorage(int fromFile, String toFile)
     {
