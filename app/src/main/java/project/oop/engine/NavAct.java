@@ -13,6 +13,7 @@ public class NavAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
         startActivity(new Intent(NavAct.this, SearchAct.class));
+        finish();
     }
 
 }
