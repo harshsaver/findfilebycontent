@@ -20,6 +20,7 @@ public class SearchAct extends AppCompatActivity {
     // The InputStream opens the resourceId and sends it to the buffer
     static String f;//=new File(Environment.getDataDirectory()+ "/niles/nalla.txt").toString(); //= Environment.getDataDirectory().toString();
     static String path;
+    Context mContext = SearchAct.this;
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -34,19 +35,19 @@ public class SearchAct extends AppCompatActivity {
         TextView tv = findViewById(R.id.sample_text);
         //tv.setText(stringFromJNI());
         String bb = " ";
-        bb = setconfiguration("/storage/emulated/0/Download/ex.txt");
-       // bb = ndkopenfile(f);
+
+        writeFileToPrivateStorage(R.raw.your_file,"your_output_file.txt");
+        path = getResources().toString();//mContext.getApplicationContext().getFilesDir().toString();
         tv.setText("Hello Harsh");
+        //bb = setconfiguration(path);
+        bb = ndkopenfile(path);
+
         if(!bb.equals("")&&!bb.equals(" ")){
             tv.setText(bb);
         }else{
             Toast.makeText(this,bb,Toast.LENGTH_LONG).show();
         }
 
-
-        //path = SearchAct.this.getApplicationContext().getFilesDir().toString();
-
-       // writeFileToPrivateStorage(R.raw.your_file,"your_output_file.txt");
     }
     /**
      * A native method that is implemented by the 'native-lib' native library,
@@ -60,7 +61,7 @@ public class SearchAct extends AppCompatActivity {
 
     public void writeFileToPrivateStorage(int fromFile, String toFile)
     {
-        Context mContext = SearchAct.this;
+
         InputStream is =   mContext.getResources().openRawResource(fromFile);
         int bytes_read;
         byte[] buffer = new byte[4096];

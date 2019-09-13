@@ -13,19 +13,19 @@ extern "C" JNIEXPORT jstring JNICALL Java_project_oop_engine_SearchAct_ndkopenfi
 char myStr[20];
 //std::string myStr;
     const char *path = env->GetStringUTFChars(j, NULL);
-FILE* fp = fopen("/storage/emulated/0/Download/ex.txt","r");
-//if(fp!=NULL)
-//{
-//fgets(myStr,20,fp);
+FILE* fp = fopen(path,"r");
+if(fp!=NULL)
+{
+fgets(myStr,20,fp);
 //fflush(fp);
 //fclose(fp);
 return env->NewStringUTF(myStr);
-//}
-//else
-//{
+}
+else
+{
 //fclose(fp);
-//return env->NewStringUTF("Error opening file!");
-//}
+return env->NewStringUTF("Error opening file!");
+}
 }
 
 /**
