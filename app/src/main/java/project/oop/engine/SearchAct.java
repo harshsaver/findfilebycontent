@@ -67,6 +67,9 @@ public class SearchAct extends AppCompatActivity {
             public void onClick(View view) {
                 query = sbar.getText().toString();
                 String check = stringFromJNI(query);
+                sv1.setVisibility(View.GONE);
+                ftitle.setVisibility(View.GONE);
+                ftext.setVisibility(View.GONE);
                 if(check.equals("pass")){
                     x = 0;
                     tv.setText("Searching...");
@@ -163,11 +166,15 @@ public class SearchAct extends AppCompatActivity {
                     }
                 mile++;
             }
-            sv1.setVisibility(View.VISIBLE);
-            ftitle.setVisibility(View.VISIBLE);
-            ftext.setVisibility(View.VISIBLE);
-            ftitle.setText(filesk.get(k).toString().substring(29));
-            ftext.setText(totalt);
+
+            if(stat==1){
+                sv1.setVisibility(View.VISIBLE);
+                ftitle.setVisibility(View.VISIBLE);
+                ftext.setVisibility(View.VISIBLE);
+                ftitle.setText(filesk.get(k).toString().substring(29));
+                ftext.setText(totalt);
+            }
+
             reader2.close();
         } catch (FileNotFoundException e) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show();
