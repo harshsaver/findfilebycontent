@@ -60,7 +60,7 @@ public class SearchAct extends AppCompatActivity {
         ftext = findViewById(R.id.filetext);
         sv1 = findViewById(R.id.sv1);
         ftitle = findViewById(R.id.filetitle);
-        //tv.setText("Hello from C++");
+        tv.setText("Click on the search icon (magnifying glass) to search");
         String bb = " ";
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
