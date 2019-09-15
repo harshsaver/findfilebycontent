@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAct extends AppCompatActivity {
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     // The InputStream opens the resourceId and sends it to the buffer
     //=new File(Environment.getDataDirectory()+ "/niles/nalla.txt").toString(); //= Environment.getDataDirectory().toString();
     static String path;
@@ -109,14 +108,6 @@ public class SearchAct extends AppCompatActivity {
     private List<File> getListFiles(File parentDir) {
         Toast.makeText(this,parentDir.toString(),Toast.LENGTH_LONG).show();
         ArrayList<File> inFiles = new ArrayList<File>();
-        if (ContextCompat.checkSelfPermission(SearchAct.this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            ActivityCompat.requestPermissions(SearchAct.this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-        }else{
             File[] files = parentDir.listFiles();
             for (File file : files) {
 
@@ -125,7 +116,7 @@ public class SearchAct extends AppCompatActivity {
              }
 
              }
-        }
+
 
         return inFiles;
     }
