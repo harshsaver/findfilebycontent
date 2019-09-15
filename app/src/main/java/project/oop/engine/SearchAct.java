@@ -1,33 +1,20 @@
 package project.oop.engine;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +23,6 @@ public class SearchAct extends AppCompatActivity {
     //=new File(Environment.getDataDirectory()+ "/niles/nalla.txt").toString(); //= Environment.getDataDirectory().toString();
     static String path;
     String query;
-    Context mContext = SearchAct.this;
     ImageButton btn_search;
     TextView tv,ftext,ftitle;
     EditText sbar;
@@ -59,8 +45,8 @@ public class SearchAct extends AppCompatActivity {
         ftext = findViewById(R.id.filetext);
         sv1 = findViewById(R.id.sv1);
         ftitle = findViewById(R.id.filetitle);
-        tv.setText("Click on the search icon (magnifying glass) to search");
-        String bb = " ";
+        tv.setText(getResources().getString(R.string.ftodo));
+
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,27 +57,17 @@ public class SearchAct extends AppCompatActivity {
                 ftext.setVisibility(View.GONE);
                 if(check.equals("pass")){
                     x = 0;
-                    tv.setText("Searching...");
+                    tv.setText(getResources().getString(R.string.searching));
                     searchfunc();
                 }else{
-                    tv.setText("");
-                    Toast.makeText(SearchAct.this,"Enter a valid query!",Toast.LENGTH_LONG).show();
+                    tv.setText(getResources().getString(R.string.validqueryerror));
+                    Toast.makeText(SearchAct.this,getResources().getString(R.string.validqueryerror),Toast.LENGTH_LONG).show();
                 }
 
             }
         });
         //writeFileToPrivateStorage(R.raw.your_file,"your_output_file.txt");
         path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();//  + "/ello.txt";//getResources().toString();//mContext.getApplicationContext().getFilesDir().toString();
-
-
-        //bb = setconfiguration(path);
-        //bb = ndkopenfile(path);
-
-      /**  if(!bb.equals("")&&!bb.equals(" ")){
-            tv.setText(bb);
-        }else{
-            Toast.makeText(this,bb,Toast.LENGTH_LONG).show();
-        }**/
 
     }
     @Override
@@ -107,7 +83,7 @@ public class SearchAct extends AppCompatActivity {
 
     private List<File> getListFiles(File parentDir) {
         Toast.makeText(this,parentDir.toString(),Toast.LENGTH_LONG).show();
-        ArrayList<File> inFiles = new ArrayList<File>();
+        ArrayList<File> inFiles = new ArrayList<>();
             File[] files = parentDir.listFiles();
             for (File file : files) {
 
@@ -140,6 +116,7 @@ public class SearchAct extends AppCompatActivity {
             String line,totalt="";
             Toast.makeText(SearchAct.this,query,Toast.LENGTH_LONG).show();
             int stat = 0,mile=1;
+            StringBuilder sb = new StringBuilder();
             while ((line = reader2.readLine()) != null) {
                 totalt = totalt + "\n" + mile + "\t\t\t" + line;
                 if(stat==0){
