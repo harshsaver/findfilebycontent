@@ -13,7 +13,12 @@ Java_project_oop_engine_SearchAct_stringFromJNI(
      std::string res = "pass";
      std::string res2 = "fail";
      std::string squ = pa;
-     if(squ == "" || squ == " "){
+     int c = 0;
+     if(squ.find_first_not_of(' ') != std::string::npos)
+     {
+         c = 1;
+     }
+     if(squ == "" || c == 0){
          return env->NewStringUTF(res2.c_str());
      }else{
          return env->NewStringUTF(res.c_str());

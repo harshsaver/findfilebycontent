@@ -61,6 +61,7 @@ public class SearchAct extends AppCompatActivity {
                     searchfunc();
                 }else{
                     tv.setText(getResources().getString(R.string.validqueryerror));
+                    sbar.setText("");
                     Toast.makeText(SearchAct.this,getResources().getString(R.string.validqueryerror),Toast.LENGTH_LONG).show();
                 }
 
@@ -86,10 +87,13 @@ public class SearchAct extends AppCompatActivity {
         ArrayList<File> inFiles = new ArrayList<>();
             File[] files = parentDir.listFiles();
             for (File file : files) {
-
-             if(file.getName().endsWith(".txt")||file.getName().endsWith(".cpp")){
-             inFiles.add(file);
-             }
+                if (file.isDirectory()) {
+                   getListFiles(file);
+                }else{
+                    if(file.getName().endsWith(".txt")||file.getName().endsWith(".cpp")||file.getName().endsWith(".java")||file.getName().endsWith(".py")){
+                        inFiles.add(file);
+                    }
+                }
 
              }
 
