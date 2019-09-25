@@ -31,7 +31,9 @@ ImageButton offline,online;
         online.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(NavAct.this,"Feature under development. Try again later!", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(NavAct.this, olsearch.class));
+                finish();
+                //Toast.makeText(NavAct.this,"Feature under development. Try again later!", Toast.LENGTH_LONG).show();
             }
         });
 

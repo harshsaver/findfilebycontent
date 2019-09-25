@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Engine</string>
+    <string name="app_name">HOIK</string>
     <string name="lang2">C++, Java,\nJavascript, XML</string>
     <string name="about">Online &amp; Offline search engine\n\nS.Y. B.Tech Div H\n\nHarsh Savergaonkar (PH14)\nOishek Mandal (PH13)\nKeyur Jain (PH15)</string>
     <string name="validqueryerror">Enter a valid query!</string>
