@@ -1,5 +1,5 @@
 //
-// Created by Harsh on 9/18/2019.
+// Created by HOIK on 9/18/2019.
 //
 
 #ifndef ENGINE_WORKER_H
@@ -7,7 +7,8 @@
 
 
 class Worker {
-
+public:
+    Worker();
 };
 
 

@@ -96,8 +96,7 @@ public class SearchAct extends AppCompatActivity {
                 }
 
              }
-
-
+            
         return inFiles;
     }
     public void searchfunc(){
