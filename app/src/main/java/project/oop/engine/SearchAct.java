@@ -27,7 +27,7 @@ public class SearchAct extends AppCompatActivity {
     TextView tv,ftext,ftitle;
     EditText sbar;
     ScrollView sv1;
-    int x = 0;
+    int x = 0,iv;
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -35,6 +35,8 @@ public class SearchAct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent mIntent = getIntent();
+        iv = mIntent.getIntExtra("iv", 0);
         setContentView(R.layout.activity_search);
         //f = this.getResources().openRawResource(R.raw.your_file).toString();
         //f = Environment.getDataDirectory().toString() + "/Download/ex.txt";//"/storage/emulated/0/Download/ex.txt";
@@ -55,16 +57,37 @@ public class SearchAct extends AppCompatActivity {
                 sv1.setVisibility(View.GONE);
                 ftitle.setVisibility(View.GONE);
                 ftext.setVisibility(View.GONE);
+                //Toast.makeText(SearchAct.this,check,Toast.LENGTH_LONG).show();
                 if(check.equals("pass")){
-                    x = 0;
-                    tv.setText(getResources().getString(R.string.searching));
-                    searchfunc();
+                    switch (iv){
+                        case 0:
+                            break;
+                        case 1:
+                            String fcheck = fileFromJNI(query);
+                            if(fcheck.equals("null")){
+                                tv.setText("File not found, try again");
+                            }else{
+                                tv.setText("Exact file or file with a similar name found!");
+                                sv1.setVisibility(View.VISIBLE);
+                                ftitle.setVisibility(View.VISIBLE);
+                                ftext.setVisibility(View.VISIBLE);
+                                ftitle.setText(query);
+                                ftext.setText(fcheck);
+                            }
+                            break;
+                        case 2:
+                            x = 0;
+                            tv.setText(getResources().getString(R.string.searching));
+                            searchfunc();
+                            break;
+                        default:
+                            break;
+                    }
                 }else{
                     tv.setText(getResources().getString(R.string.validqueryerror));
                     sbar.setText("");
                     Toast.makeText(SearchAct.this,getResources().getString(R.string.validqueryerror),Toast.LENGTH_LONG).show();
                 }
-
             }
         });
         //writeFileToPrivateStorage(R.raw.your_file,"your_output_file.txt");
@@ -81,6 +104,7 @@ public class SearchAct extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI(String qu);
+    public native String fileFromJNI(String ff);
 
     private List<File> getListFiles(File parentDir) {
         Toast.makeText(this,parentDir.toString(),Toast.LENGTH_LONG).show();
@@ -96,7 +120,7 @@ public class SearchAct extends AppCompatActivity {
                 }
 
              }
-            
+
         return inFiles;
     }
     public void searchfunc(){

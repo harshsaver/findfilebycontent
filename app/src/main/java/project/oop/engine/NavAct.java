@@ -10,16 +10,22 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class NavAct extends AppCompatActivity {
 ImageButton offline,online;
+RadioGroup rg;
+RadioButton rb1,rb2;
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
-
+        rg = findViewById(R.id.rg1);
+        rb1 = findViewById(R.id.rb1);
+        rb2 = findViewById(R.id.rb2);
         offline= findViewById(R.id.btn_gooffline);
         online= findViewById(R.id.btn_goonline);
         offline.setOnClickListener(new View.OnClickListener() {
@@ -47,8 +53,20 @@ public void permission(){
                 MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 
     }else{
-        startActivity(new Intent(NavAct.this, SearchAct.class));
-        finish();
+        int selected = rg.getCheckedRadioButtonId(),stat = 0;
+        if(selected==-1){
+            Toast.makeText(NavAct.this,"Select a mode!", Toast.LENGTH_LONG).show();
+        }else{
+            if(rb1.isChecked()){
+                stat = 1;
+            }else if(rb2.isChecked()){
+                stat = 2;
+            }
+            Intent myIntent = new Intent(NavAct.this, SearchAct.class);
+            myIntent.putExtra("iv", stat);
+            startActivity(myIntent);
+            finish();
+        }
     }
 }
 }
